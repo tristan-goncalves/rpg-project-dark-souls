@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rpg_game_project/components/ui/back_button_widget.dart';
+import 'package:rpg_game_project/util/game_session.dart';
 import '../components/characters/skeleton.dart';
 import '../components/characters/boss.dart';
 import '../components/characters/knight.dart';
@@ -177,7 +178,7 @@ class GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                 opacity: fadeController,
                 child: BonfireWidget(
                   map: map.map,
-                  player: Knight(map.properties['player_position']),
+                  player: Knight(map.properties['player_position'], initialLife: GameSession.I.life),
                   components: components,
                   playerControllers: [
                     Joystick(

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import '../../util/boss_sprite_sheet.dart';
 import '../../services/audio_controller.dart';
 
-// Le boss ne se déplace pas.
 // États: idle (rien), volley (pattern de boules de feu), charging (charge AoE en cercle).
 enum BossState { idle, volley, charging }
 
@@ -20,7 +19,7 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   static const double rangeDamage = 8;
   static const double rangeSpeed = 25; // px/s des boules de feu
 
-  static const double speedBoss = 0; // vitesse du boss à 0 : notre boss est immobile
+  static const double speedBoss = 0;
   static const double maxLifeBoss = 500;
 
   // Temps nécessaire à l'activation de la charge du boss (2s) en fonction de si le joueur est près de lui

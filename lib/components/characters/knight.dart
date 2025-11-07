@@ -2,6 +2,7 @@ import 'package:bonfire/bonfire.dart';
 import 'package:flutter/material.dart';
 import '../../util/player_sprite_sheet.dart';
 import '../../services/estus_controller.dart';
+import 'package:rpg_game_project/util/game_session.dart';
 
 class Knight extends SimplePlayer with BlockMovementCollision, UseLifeBar {
   static const double tileSize = 24;
@@ -10,13 +11,13 @@ class Knight extends SimplePlayer with BlockMovementCollision, UseLifeBar {
   static const double rangeDamage = 15;
   static const double rangeSpeed = 40;
 
-  Knight(Vector2 position)
+  Knight(Vector2 position, {double? initialLife})
       : super(
           position: position,
           size: Vector2.all(tileSize),
           speed: 60,
           animation: PlayerSpriteSheet.playerAnimations(),
-          life: maxLifePlayer,
+          life: initialLife ?? maxLifePlayer,
         ) {
     setupLifeBar(
       size: Vector2(tileSize * 1.2, tileSize / 8),
@@ -33,8 +34,13 @@ class Knight extends SimplePlayer with BlockMovementCollision, UseLifeBar {
   Future<void> onLoad() async {
     await super.onLoad();
     add(RectangleHitbox(size: Vector2(14, 14), position: Vector2(1, 1)));
+
+    GameSession.I.maxLife = maxLifePlayer;
     print('[Knight] Vie initiale : $maxLifePlayer');
+
+    
   }
+
 
   // Gestion du joystick
   @override
@@ -49,6 +55,7 @@ class Knight extends SimplePlayer with BlockMovementCollision, UseLifeBar {
           break;
         case 2:
           useEstus();
+          GameSession.I.setLife(life);
           break;
       }
     }
@@ -56,7 +63,7 @@ class Knight extends SimplePlayer with BlockMovementCollision, UseLifeBar {
   }
 
   void useEstus() {
-    final success = EstusController.I.consumeAndHeal(gameRef); // OK: interface
+    final success = EstusController.I.consumeAndHeal(gameRef);
     if (!success) {
       final text = TextComponent(
         text: 'Plus de fioles !',
@@ -82,8 +89,6 @@ class Knight extends SimplePlayer with BlockMovementCollision, UseLifeBar {
       gameRef.add(text);
     }
   }
-
-
 
   // Attaque de mêlée
   void attackMelee() async {
@@ -115,7 +120,14 @@ class Knight extends SimplePlayer with BlockMovementCollision, UseLifeBar {
   @override
   void onReceiveDamage(AttackOriginEnum attacker, double damage, dynamic id) {
     super.onReceiveDamage(attacker, damage, id);
+    GameSession.I.setLife(life);
     print('[Knight] Dégâts reçus : $damage | Vie restante : $life');
+  }
+
+  @override
+  void addLife(double value) {
+    super.addLife(value);
+    GameSession.I.setLife(life);
   }
 
   @override
