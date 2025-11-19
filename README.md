@@ -49,21 +49,19 @@ Explore des donjons mystérieux, affronte des ennemis, utilise tes fioles d’Es
 # Cloner & installer
 
 ## 1. Cloner le dépôt
-[git clone https://github.com/tristan-goncalves/rpg-project-dark-souls](https://github.com/tristan-goncalves/rpg-project-dark-souls)
+`git clone https://github.com/tristan-goncalves/rpg-project-dark-souls`
 
 ## 2. Aller dans le dossier
-cd rpg-project-dark-souls
+`cd rpg-project-dark-souls`
 
 ## 3. Installer les dépendances
-flutter pub get
+`flutter pub get`
 
-# Lancer le jeu
-
-flutter run
+## 4. Lancer le jeu
+`flutter run`
 
 
 # Technologies utilisées
-
 - Flutter
 
 - Bonfire 3.10.1
