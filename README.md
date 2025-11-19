@@ -1,16 +1,75 @@
-# rpg_game_project
+# Dark Souls Pixel Adventure
 
-A new Flutter project.
+Un jeu d’action-aventure 2D en pixel art, développé avec Flutter et le moteur Bonfire.
+Explore des donjons mystérieux, affronte des ennemis, utilise tes fioles d’Estus pour survivre et affronte un boss final épique.
 
-## Getting Started
+# Fonctionnalités principales
 
-This project is a starting point for a Flutter application.
+- Pixel Art style Dark Fantasy
 
-A few resources to get you started if this is your first Flutter project:
+- Système de combat
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Attaque de mêlée 🗡️
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Attaque à distance 🔥
+
+- Utilisation de fioles d’Estus
+
+- Dialogues immersifs
+
+- Téléportation
+
+- Musiques intégrées
+
+- Maps interconnectées
+
+- Système de téléportation type Fog Gate
+
+- PNJ & Ennemis
+
+- Squelettes
+
+- Boss final
+
+# Structure du projet :
+
+![Schéma d'architecture](assets/images/architecture_diagram.png)
+
+# Installation & lancement
+
+🔧 Prérequis
+
+- Flutter 3.35
+
+- Dart 3.9.2
+
+- Un émulateur ou un appareil physique
+
+
+# Cloner & installer
+
+## 1. Cloner le dépôt
+[git clone https://github.com/tristan-goncalves/rpg-project-dark-souls](https://github.com/tristan-goncalves/rpg-project-dark-souls)
+
+## 2. Aller dans le dossier
+cd rpg-project-dark-souls
+
+## 3. Installer les dépendances
+flutter pub get
+
+# Lancer le jeu
+
+flutter run
+
+
+# Technologies utilisées
+
+- Flutter
+
+- Bonfire 3.10.1
+
+- Flame (FlameAudio)
+
+- Tiled (éditeur de maps)
+
+- Dart
