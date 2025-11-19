@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:rpg_game_project/util/game_difficulty.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  GameDifficulty _difficulty = GameDifficulty.normal; // difficulté normal par défaut
 
   @override
   Widget build(BuildContext context) {
@@ -43,17 +51,70 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
 
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 30),
+
+                  Card(
+                    color: Colors.white.withOpacity(0.9),
+                    margin: const EdgeInsets.symmetric(horizontal: 30),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Difficulté',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          RadioListTile<GameDifficulty>(
+                            title: const Text('Normal'),
+                            subtitle: const Text('Ennemis avec leurs PV normaux.'),
+                            value: GameDifficulty.normal,
+                            groupValue: _difficulty,
+                            onChanged: (value) {
+                              if (value == null) return;
+                              setState(() => _difficulty = value);
+                            },
+                          ),
+                          RadioListTile<GameDifficulty>(
+                            title: const Text('Difficile'),
+                            subtitle: const Text('Ennemis avec 2x plus de PV.'),
+                            value: GameDifficulty.hard,
+                            groupValue: _difficulty,
+                            onChanged: (value) {
+                              if (value == null) return;
+                              setState(() => _difficulty = value);
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 30),
+
                   ElevatedButton.icon(
-                    onPressed: () async {
-                      Navigator.pushNamed(context, '/game');
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/game',
+                        arguments: _difficulty,
+                      );
                     },
                     icon: const Icon(Icons.play_arrow),
                     label: const Text('Lancer la partie'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                   ),
                   ElevatedButton.icon(
@@ -83,10 +144,10 @@ class ProfileScreen extends StatelessWidget {
                     margin: const EdgeInsets.symmetric(horizontal: 30),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15)),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                    child: const Padding(
+                      padding: EdgeInsets.all(16.0),
                       child: Column(
-                        children: const [
+                        children: [
                           Text(
                             'Statistiques à venir...',
                             style: TextStyle(

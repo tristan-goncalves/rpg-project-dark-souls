@@ -11,6 +11,7 @@ import '../services/teleport_controller.dart';
 import '../components/game-items/treasure_chest.dart';
 import '../services/audios/boss_music_controller.dart';
 import '../services/audios/victory_music_controller.dart';
+import 'package:rpg_game_project/util/game_difficulty.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({Key? key}) : super(key: key);
@@ -48,6 +49,11 @@ class GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     const double tileSize = 16.0;
+
+    final difficulty =
+        ModalRoute.of(context)?.settings.arguments as GameDifficulty? ??
+            GameDifficulty.normal;
+    final double enemyHpMultiplier = difficulty.enemyHpMultiplier;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -110,8 +116,8 @@ class GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                 fadeDuration: const Duration(milliseconds: 5000),
                 delayBeforeTeleport: const Duration(milliseconds: 500),
               ),
-              Skeleton(Vector2(tileSize * 22, tileSize * 31)),
-              Skeleton(Vector2(tileSize * 24, tileSize * 24)),
+              Skeleton(Vector2(tileSize * 22, tileSize * 31), hpMultiplier: enemyHpMultiplier),
+              Skeleton(Vector2(tileSize * 24, tileSize * 24), hpMultiplier: enemyHpMultiplier),
             ]);
           } else if (id == '/map2') {
             components.addAll([
@@ -155,7 +161,7 @@ class GameScreenState extends State<GameScreen> with TickerProviderStateMixin {
                 delayBeforeTeleport: const Duration(milliseconds: 500),
               ),
               BossMusicController(),
-              Boss(Vector2(tileSize * 24, tileSize * 36)),
+              Boss(Vector2(tileSize * 24, tileSize * 36), hpMultiplier: enemyHpMultiplier),
             ]);
           }
           else if (id == '/map4') {

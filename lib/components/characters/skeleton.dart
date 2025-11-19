@@ -14,13 +14,13 @@ class Skeleton extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   bool returningToSpawn = false;
   bool isAttacking = false;
 
-  Skeleton(Vector2 position)
+  Skeleton(Vector2 position, {double hpMultiplier = 1.0})
       : super(
           position: position,
           size: Vector2.all(32),
           speed: speedSkeleton,
           animation: SkeletonSpriteSheet.skeletonAnimations(),
-          life: maxLifeSkeleton,
+          life: maxLifeSkeleton * hpMultiplier,
         ) {
     setupLifeBar(
       size: Vector2(tileSize * 1.2, tileSize / 8),

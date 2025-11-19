@@ -44,13 +44,13 @@ class Boss extends SimpleEnemy with BlockMovementCollision, UseLifeBar {
   late SpriteAnimation animFireball;
   late SpriteAnimation animFireballDestroy;
 
-  Boss(Vector2 position)
+  Boss(Vector2 position, {double hpMultiplier = 1.0})
       : super(
           position: position,
           size: Vector2.all(112),
           speed: speedBoss,
           animation: BossSpriteSheet.bossAnimations(),
-          life: maxLifeBoss,
+          life: maxLifeBoss * hpMultiplier,
         ) {
     anchor = Anchor.center;
 
